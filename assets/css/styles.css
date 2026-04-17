@@ -594,25 +594,66 @@ spline-viewer::part(logo) {
   }
 }
 
-/* Mobile portrait: Spline gets its own full-width band below the name block,
-   tall enough for the 3D scene to render properly. */
+/* Mobile portrait: switch hero to flex column and put Spline in the normal
+   flow as its own full-width tall block. Absolute positioning was preventing
+   the 3D scene from rendering at a usable size. */
 @media (max-width: 640px) {
   .hero-editorial {
+    display: flex;
+    flex-direction: column;
+    height: auto;
     min-height: 100vh;
-    padding-top: clamp(100px, 16vh, 140px);
-    padding-bottom: clamp(24px, 6vh, 48px);
+    padding: 90px 20px 40px;
+    gap: 20px;
+    overflow: visible;
+  }
+  .hero-editorial > *:not(.hero-3d) {
+    pointer-events: auto;
+  }
+  .hero-editorial .name {
+    order: 1;
+    font-size: clamp(56px, 18vw, 96px);
+    line-height: 0.88;
+  }
+  .hero-editorial .desc {
+    order: 2;
+    margin-top: 8px;
+    padding-top: 16px;
+    max-width: 100%;
   }
   .hero-editorial .hero-3d {
+    order: 3;
+    position: relative;
     top: auto;
-    bottom: clamp(200px, 30vh, 300px);
-    left: 4%;
-    right: 4%;
+    left: auto;
+    right: auto;
+    bottom: auto;
     transform: none;
-    width: auto;
-    height: clamp(260px, 34vh, 340px);
+    width: 100%;
+    height: clamp(300px, 46vh, 420px);
+    margin: 8px 0 4px;
     opacity: 1;
-    z-index: 0;
+    z-index: 1;
     pointer-events: none;
+    display: block;
+    /* override desktop edge-fade mask for clean full-width render on mobile */
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+  .hero-editorial .star {
+    order: 4;
+    align-self: flex-start;
+    margin: 4px 0;
+  }
+  .hero-editorial .star svg {
+    width: 56px;
+    height: 56px;
+  }
+  .hero-editorial .tagline {
+    order: 5;
+    text-align: left;
+    font-size: clamp(56px, 18vw, 96px);
+    line-height: 0.88;
   }
 }
 
