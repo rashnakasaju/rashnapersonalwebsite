@@ -1,4 +1,4 @@
-# Rashna Kasaju / Personal Website
+# Rashna Kasaju / Personal Website 
 
 A bespoke editorial personal site for **Rashna Kasaju**. Content creator, digital marketer, and marketing student at Stony Brook University. Design inspired by [leonidkostetskyi.com](https://leonidkostetskyi.com/).
 
