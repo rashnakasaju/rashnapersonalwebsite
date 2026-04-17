@@ -405,14 +405,21 @@ body.dark .nav .theme-toggle .icon {
 }
 
 @media (max-width: 900px) {
-  /* iOS Safari/Chrome mishandle mix-blend-mode on position:fixed,
-     which makes the nav invisible. Force a solid color on mobile. */
+  /* iOS/mobile browsers often drop mix-blend-mode on position:fixed, which
+     makes the nav invisible. Force a solid tinted bar so the header is
+     always readable regardless of what's behind it. */
   .nav {
-    mix-blend-mode: normal;
-    color: var(--fg);
+    mix-blend-mode: normal !important;
+    color: var(--fg) !important;
+    background: rgba(246, 234, 223, 0.88);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
   }
   body.dark .nav {
-    color: var(--fg);
+    background: rgba(20, 18, 16, 0.78);
+    color: var(--fg) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   }
   .nav-toggle {
     display: flex;
@@ -540,7 +547,8 @@ spline-viewer::part(logo) {
   }
 }
 
-/* Mobile portrait: center Spline between the name and tagline as a clean focal element */
+/* Mobile portrait: Spline sits in the lower half, below the name block,
+   so the name and tagline never overlap it. */
 @media (max-width: 640px) {
   .hero-editorial {
     min-height: 100vh;
@@ -548,13 +556,13 @@ spline-viewer::part(logo) {
     padding-bottom: clamp(24px, 6vh, 48px);
   }
   .hero-editorial .hero-3d {
-    top: 50%;
+    top: auto;
+    bottom: clamp(220px, 32vh, 320px);
     left: 50%;
     right: auto;
-    bottom: auto;
-    transform: translate(-50%, -50%);
-    width: min(86%, 360px);
-    height: min(36vh, 320px);
+    transform: translateX(-50%);
+    width: min(72%, 300px);
+    height: min(28vh, 240px);
     opacity: 0.9;
     z-index: 0;
     pointer-events: none;
