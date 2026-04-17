@@ -405,6 +405,15 @@ body.dark .nav .theme-toggle .icon {
 }
 
 @media (max-width: 900px) {
+  /* iOS Safari/Chrome mishandle mix-blend-mode on position:fixed,
+     which makes the nav invisible. Force a solid color on mobile. */
+  .nav {
+    mix-blend-mode: normal;
+    color: var(--fg);
+  }
+  body.dark .nav {
+    color: var(--fg);
+  }
   .nav-toggle {
     display: flex;
   }
@@ -531,36 +540,42 @@ spline-viewer::part(logo) {
   }
 }
 
-/* Mobile portrait: show Spline as a soft accent behind the hero text */
+/* Mobile portrait: center Spline between the name and tagline as a clean focal element */
 @media (max-width: 640px) {
   .hero-editorial {
-    min-height: 92vh;
+    min-height: 100vh;
+    padding-top: clamp(100px, 16vh, 140px);
+    padding-bottom: clamp(24px, 6vh, 48px);
   }
   .hero-editorial .hero-3d {
-    top: clamp(72px, 14vh, 140px);
-    right: -4%;
+    top: 50%;
+    left: 50%;
+    right: auto;
     bottom: auto;
-    left: -4%;
-    height: clamp(260px, 40vh, 380px);
-    opacity: 0.38;
+    transform: translate(-50%, -50%);
+    width: min(86%, 360px);
+    height: min(36vh, 320px);
+    opacity: 0.9;
     z-index: 0;
     pointer-events: none;
   }
 }
 
-/* Mobile landscape (short viewports): tuck Spline to the right, keep text readable */
+/* Mobile landscape (short viewports): tuck Spline into the right side next to the name */
 @media (max-width: 900px) and (orientation: landscape) and (max-height: 520px) {
   .hero-editorial {
-    min-height: 520px;
+    min-height: 100vh;
   }
   .hero-editorial .hero-3d {
-    top: clamp(56px, 10vh, 96px);
-    bottom: clamp(56px, 10vh, 96px);
-    left: 46%;
-    right: 2%;
-    height: auto;
-    opacity: 0.5;
-    pointer-events: auto;
+    top: 50%;
+    left: auto;
+    right: 3%;
+    bottom: auto;
+    transform: translateY(-50%);
+    width: 42%;
+    height: min(78vh, 320px);
+    opacity: 0.85;
+    pointer-events: none;
   }
 }
 
