@@ -420,6 +420,7 @@ body.dark .nav .theme-toggle .icon {
     padding: 14px 20px;
     height: 56px;
     box-sizing: border-box;
+    gap: 16px;
   }
   body.dark .nav {
     background: var(--bg);
@@ -428,11 +429,35 @@ body.dark .nav .theme-toggle .icon {
   .nav .brand {
     font-size: 1.25rem;
   }
-  .nav-toggle {
+  /* Ultra-explicit hamburger: visible on ALL mobile browsers */
+  .nav .nav-toggle {
     display: flex !important;
-    width: 28px;
-    height: 20px;
-    z-index: 2;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: 32px !important;
+    height: 22px !important;
+    min-width: 32px;
+    flex-shrink: 0;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+    background: transparent;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    color: var(--fg) !important;
+    z-index: 510;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  .nav .nav-toggle span {
+    display: block !important;
+    width: 100% !important;
+    height: 2.5px !important;
+    background: currentColor !important;
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.2s ease;
   }
   /* Dropdown menu: uses display none/flex (rock solid on all mobile browsers)
      instead of transform which iOS Safari frequently mishandles. */
@@ -569,8 +594,8 @@ spline-viewer::part(logo) {
   }
 }
 
-/* Mobile portrait: Spline sits in the lower half, below the name block,
-   so the name and tagline never overlap it. */
+/* Mobile portrait: Spline gets its own full-width band below the name block,
+   tall enough for the 3D scene to render properly. */
 @media (max-width: 640px) {
   .hero-editorial {
     min-height: 100vh;
@@ -579,19 +604,19 @@ spline-viewer::part(logo) {
   }
   .hero-editorial .hero-3d {
     top: auto;
-    bottom: clamp(220px, 32vh, 320px);
-    left: 50%;
-    right: auto;
-    transform: translateX(-50%);
-    width: min(72%, 300px);
-    height: min(28vh, 240px);
-    opacity: 0.9;
+    bottom: clamp(200px, 30vh, 300px);
+    left: 4%;
+    right: 4%;
+    transform: none;
+    width: auto;
+    height: clamp(260px, 34vh, 340px);
+    opacity: 1;
     z-index: 0;
     pointer-events: none;
   }
 }
 
-/* Mobile landscape (short viewports): tuck Spline into the right side next to the name */
+/* Mobile landscape (short viewports): Spline to the right, name to the left */
 @media (max-width: 900px) and (orientation: landscape) and (max-height: 520px) {
   .hero-editorial {
     min-height: 100vh;
@@ -602,9 +627,9 @@ spline-viewer::part(logo) {
     right: 3%;
     bottom: auto;
     transform: translateY(-50%);
-    width: 42%;
-    height: min(78vh, 320px);
-    opacity: 0.85;
+    width: 44%;
+    height: min(80vh, 340px);
+    opacity: 1;
     pointer-events: none;
   }
 }
