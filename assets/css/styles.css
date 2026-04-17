@@ -531,9 +531,36 @@ spline-viewer::part(logo) {
   }
 }
 
+/* Mobile portrait: show Spline as a soft accent behind the hero text */
 @media (max-width: 640px) {
+  .hero-editorial {
+    min-height: 92vh;
+  }
   .hero-editorial .hero-3d {
-    display: none;
+    top: clamp(72px, 14vh, 140px);
+    right: -4%;
+    bottom: auto;
+    left: -4%;
+    height: clamp(260px, 40vh, 380px);
+    opacity: 0.38;
+    z-index: 0;
+    pointer-events: none;
+  }
+}
+
+/* Mobile landscape (short viewports): tuck Spline to the right, keep text readable */
+@media (max-width: 900px) and (orientation: landscape) and (max-height: 520px) {
+  .hero-editorial {
+    min-height: 520px;
+  }
+  .hero-editorial .hero-3d {
+    top: clamp(56px, 10vh, 96px);
+    bottom: clamp(56px, 10vh, 96px);
+    left: 46%;
+    right: 2%;
+    height: auto;
+    opacity: 0.5;
+    pointer-events: auto;
   }
 }
 
